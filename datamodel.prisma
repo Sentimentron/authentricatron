@@ -1,0 +1,43 @@
+
+type User {
+  id: ID! @id
+  # 
+  email: String!
+  # The username field is optional.
+  username: String
+  # This field stores a temporary login nonce that's forwarded
+  # to the User's email account on login.
+  loginToken: String
+  # When we send an email out to the user to log them in,
+  # this field stores when the email expires.
+  loginTokenExpiresAt: DateTime
+  # ADMINs have additional powers
+  kind: AccessRole!
+  # This stores when the user's active email address was last confirmed.
+  # If this field is blank, the user should be considered as PENDING
+  emailConfirmedOn: DateTime
+  # When an user changes to a new email address, this field holds
+  # the revised email address information.
+  newEmail: String
+  newEmailExpiresAt: DateTime
+
+  groups: GroupMembership @relation(link: INLINE)
+}
+
+type GroupMembership {
+  id: ID! @id
+  user: User!
+  group: Group!
+}
+
+type Group {
+  id: ID! @id
+  name: String! @unique
+}
+
+enum AccessRole {
+  # ADMINs have the power to add users to groups and change things, 
+  # regular application users are only USERS.
+  USER
+  ADMIN
+}
