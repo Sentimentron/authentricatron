@@ -26,7 +26,7 @@ type User {
 
   # This field contains data that is accessible to every application
   # that's available in this system.
-  globalData: JSON
+  globalData: Json
 
   applications: [ApplicationMembership]
   groups: GroupMembership @relation(link: INLINE)
@@ -56,15 +56,16 @@ type ApplicationMembership {
   id: ID! @id
   user: User!
   app: Application
-  data: JSON
+  data: Json
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
 type ApplicationQueue {
+  id: ID! @id
   user: User!
   app: Application
-  data: JSON
+  data: Json
   createdAt: DateTime! @createdAt
 }
 
