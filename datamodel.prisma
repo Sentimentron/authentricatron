@@ -1,9 +1,8 @@
 
 type User {
   id: ID! @id
-  # 
   email: String!
-  # The username field is optional.
+  # The username field is optional, but mandatory for Admin accounts.
   username: String
   # This field stores a temporary login nonce that's forwarded
   # to the User's email account on login.
@@ -16,12 +15,57 @@ type User {
   # This stores when the user's active email address was last confirmed.
   # If this field is blank, the user should be considered as PENDING
   emailConfirmedOn: DateTime
+  # This stores the time at which an ADMIN, or the system, approved this account.
+  # The user cannot login until approved.
+  approvedOn: DateTime
+
   # When an user changes to a new email address, this field holds
   # the revised email address information.
   newEmail: String
   newEmailExpiresAt: DateTime
 
+  # This field contains data that is accessible to every application
+  # that's available in this system.
+  globalData: JSON
+
+  applications: [ApplicationMembership]
   groups: GroupMembership @relation(link: INLINE)
+
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type UserQueue {
+  # This queue stores accounts which are waiting for approval
+  id: ID! @id
+  user: User! @unique
+  # Stored separately because it may be encrypted in the base table
+  email: String! @unique
+  username: String! @unique
+}
+
+type Application {
+  id: ID! @id
+  name: String @unique
+  # If set to True, Authenticatron will permit any User to start accessing this Application
+  # whenever they sign up.
+  autoJoinMembers: Boolean
+}
+
+type ApplicationMembership {
+  id: ID! @id
+  user: User!
+  app: Application
+  data: JSON
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type ApplicationQueue {
+  user: User!
+  app: Application
+  data: JSON
+  createdAt: DateTime! @createdAt
 }
 
 type GroupMembership {
