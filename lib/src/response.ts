@@ -1,11 +1,11 @@
-import {IErrorResponse} from './errors'
-import {IVersionResponse} from './versioning'
+import { IErrorResponse } from './errors';
+import { IVersionResponse } from './versioning';
 
 export type AuthenticatronResponse = IErrorResponse | IVersionResponse;
 
 export enum ResponseKind {
-    OK,
-    Error,
+  OK,
+  Error,
 }
 
 export interface IResponseEnvelope {

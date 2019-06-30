@@ -1,6 +1,6 @@
-import {AuthenticatronRequest} from './request'
-import {AuthenticatronResponse} from './response'
-import {IVersionResponse, VersionRequest} from './versioning'
+import { AuthenticatronRequest } from './request';
+import { AuthenticatronResponse } from './response';
+import { IVersionResponse, VersionRequest } from './versioning';
 
 export interface ITransporter {
   send(r: AuthenticatronRequest): Promise<AuthenticatronResponse>;

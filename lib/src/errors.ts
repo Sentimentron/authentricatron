@@ -19,14 +19,13 @@ const errorCodeMap: { [key: number]: IErrorDescription } = {
   },
 };
 
-
 // tslint:disable-next-line: max-classes-per-file
 export class ClientError extends Error implements ISingleError {
   public details: string;
   public errorCode: number;
   public internalError: Error | null;
   constructor(errorCode: number, details: string, internalError: Error | null) {
-      super();
+    super();
     this.errorCode = errorCode;
     this.details = details;
     this.internalError = internalError;

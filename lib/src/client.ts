@@ -1,6 +1,6 @@
-import {AuthenticatronError, ClientError} from './errors'
-import {ITransporter} from './transporter'
-import {kClientVersion, VersionRequest} from './versioning'
+import { AuthenticatronError, ClientError } from './errors';
+import { ITransporter } from './transporter';
+import { kClientVersion, VersionRequest } from './versioning';
 
 type PossibleErrorPromise = Promise<AuthenticatronError | null>;
 
@@ -23,7 +23,7 @@ export class AuthenticatronClient {
   private async throwErrorOnConnectionException() {
     const connectionResponse = this.establishConnectionIfNeeded();
     if (connectionResponse != null) {
-        throw connectionResponse;
+      throw connectionResponse;
     }
   }
 

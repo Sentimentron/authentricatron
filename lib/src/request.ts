@@ -1,4 +1,4 @@
-import {VersionRequest} from './versioning'
+import { VersionRequest } from './versioning';
 
 export type AuthenticatronRequest = VersionRequest;
 
