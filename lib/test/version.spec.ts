@@ -5,35 +5,10 @@ import {ClientError} from '../src/errors';
 import {ITransporter} from '../src/transporter';
 import {IVersionResponse, VersionRequest} from '../src/versioning';
 
+import MockableTransporter from './transporter'
+
 import {expect, assert} from 'chai'
 import {describe, it} from 'mocha'
-
-class MockableTransporter implements ITransporter {
-
-    private response: AuthenticatronResponse
-
-    constructor(response: AuthenticatronResponse) {
-        this.response = response
-    }
-
-    public async send(_: AuthenticatronRequest): Promise<AuthenticatronResponse> {
-        return this.response
-    }
-
-    public async establishConnection(_: string): Promise<boolean> {
-        return true
-    }
-
-    public async sendVersionRequest(r: VersionRequest): Promise<IVersionResponse> {
-        const response = await this.send(r)
-        if (response.kind === "version") {
-            return response
-        }
-        const err = new ClientError(105, JSON.stringify(response), null);
-        throw err;
-    }
-}
-
 
 describe('Version check', ()=> {
     it("should say everything's fine when there's a supported version", async ()=> {
