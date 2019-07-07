@@ -21,10 +21,11 @@
     "mocha": "^6.1.4",
     "prettier": "^1.18.2",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.2"
-  },
-  "dependencies": {
+    "typescript": "^3.5.2",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0"
+  },
+  "dependencies": {
+    
   }
 }
