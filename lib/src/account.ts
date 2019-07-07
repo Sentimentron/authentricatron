@@ -24,9 +24,10 @@ enum ApplicationLifecycleStage {
 }
 
 interface INewAccountRequest {
+  kind: "accountRequest"
   username: string;
   email: string;
-  kind: AccountKind;
+  accountKind: AccountKind;
   data: JSON;
 }
 
